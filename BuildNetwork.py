@@ -17,4 +17,7 @@ class BuildNetwork():
         self.df = pandas.read_csv(fname)
 
     def getstart(self):
-        self.start = self.df.kmlgeology.str.extract('\(([0-9-.]* [0-9-.]*),')
+        self.start = self.df.kmlgeometry.str.extract('\(([0-9-.]* [0-9-.]*),')
+    
+    def getend(self):
+        self.end = self.df.kmlgeometry.str.extract(',([0-9-.]* [0-9-.]*)\)')
