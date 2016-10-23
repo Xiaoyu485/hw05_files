@@ -224,7 +224,7 @@ class GeoPlotter:
 # Getting the path to bevel this way is just too hard, and probably not worth it
 # Probably the right way to do it is make my own "beveled line collection" class.
 # Or maybe add a keyword attribute for "bevel" for each line?
-#         if 'linewidth' in defaults:
+#        if 'linewidth' in defaults:
 #             newparams = defaults.copy()
 #             del newparams['linewidth']
 #             newparams = self._set_zorder(newparams)
@@ -293,7 +293,7 @@ class GeoPlotter:
         of the default style are changed in plotting."""
         # plot the edges
         edge_kwargs = {}
-        default_style = net.edge_styles['default']
+        default_style = net.graph['edge_styles']['default']
         edge_options = default_style.keys()
         for name in edge_options:
             edge_kwargs[name] = []
@@ -314,7 +314,7 @@ class GeoPlotter:
             lines.append(new_line)
             line_style = default_style.copy()
             if 'style' in edge_data:
-                line_style.update( net.edge_styles.get( edge_data['style'], {}) )
+                line_style.update( net.graph['edge_styles'].get( edge_data['style'], {}) )
             line_style.update(edge_data) 
             if 'bevel' in edge_options:
                 if line_style['bevel']:
@@ -350,7 +350,7 @@ class GeoPlotter:
             self.drawPoints(bevel_lon, bevel_lat, **bevel_kwargs)
         # plot the nodes
         node_kwargs = {}
-        default_style = net.node_styles['default']
+        default_style = net.graph['node_styles']['default']
         node_options = default_style.keys()
         for name in node_options:
             node_kwargs[name] = []
@@ -362,7 +362,7 @@ class GeoPlotter:
             lat.append(node_lat)
             node_style = default_style.copy()
             if 'style' in node_data:
-                node_style.update( net.node_styles.get( node_data['style'], {}) )
+                node_style.update( net.graph['node_styles'].get( node_data['style'], {}) )
             node_style.update(node_data)
             for name in node_options:
                 node_kwargs[name].append(node_style[name])
@@ -370,7 +370,7 @@ class GeoPlotter:
         lat = scipy.array(lat)
         if 'marker' not in node_options:
             node_kwargs = self._set_zorder(node_kwargs)
-            self.drawPoints(lon,lat,**node_kwargs)
+            #self.drawPoints(lon,lat,**node_kwargs)
         else:
             # Have to plot each type of marker separately
             markers = scipy.array(node_kwargs['marker'])
@@ -390,5 +390,6 @@ class GeoPlotter:
         min_lon = lon.min()
         max_lon = lon.max()
         lon_range = max_lon - min_lon
+#        self.setZoom(-97.8526,30.2147,-97.6264,30.4323)
         self.setZoom(min_lon - .1*lon_range, min_lat - .1*lat_range, max_lon + .1*lon_range, max_lat + .1*lat_range)
     
