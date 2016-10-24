@@ -30,7 +30,7 @@ class GeoPlotter:
                 urcrnrlon=180,
                 urcrnrlat=90,
                 area_thresh=1000,
-                resolution='c')
+                resolution='h')
         defaults.update(kwargs)
         self.zorder = 0
         self.m = Basemap(**defaults)
