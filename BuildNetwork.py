@@ -21,6 +21,8 @@ class BuildNetwork():
         self.plotter = geoplotter.GeoPlotter()
         self.net = networkx.DiGraph(node_styles = dict(default=dict()),edge_styles=dict(default=dict(color='blue',linewidths=0.1)))
         self.nodearray=[]
+        self.arcframe = pandas.DataFrame(columns=['Start','End','Miles'])
+        self.nodeframe=pandas.DataFrame(columns=['node'])
 #        self.df['way']=self.df.kmlgeometry.str.extractall('\((.*)\)')
 
     def getstart(self):
@@ -60,6 +62,8 @@ class BuildNetwork():
             if self.df.ONE_WAY[i] == 'FT':
                 self.net.add_edge(node1,node2,style='default',miles = self.df.MILES[i])
                 self.nodearray.append([self.start.x[i],self.start.y[i]])
+                df2 = pandas.DataFrame([node1,node2,self.df.MILES[i]],columns=['start','node','miles'])
+                self.arcframe.append(df2)
             elif self.df.ONE_WAY[i] == 'TF':
                 self.net.add_edge(node2,node1,style='default',miles = self.df.MILES[i])
                 self.nodearray.append([self.start.x[i],self.start.y[i]])
@@ -130,7 +134,11 @@ class BuildNetwork():
             r.append((node1[0],node1[1]))
         line.append(r)
         self.plotter.drawLines(line,color='orange',alpha=0.92)
-        
+    
+    def getSPCplex(self):
+        self.nodeframe=pandas.DataFrame(self.net.nodes(),columns=['node'])
+#        def loaddata():
+            
 
 if __name__ == '__main__':
     BN = BuildNetwork();
