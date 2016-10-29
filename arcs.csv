@@ -1,0 +1,8 @@
+Start,End,ArcData
+A,B,1
+B,C,1
+C,D,1
+D,E,1
+A,C,3
+A,D,4
+A,E,5
