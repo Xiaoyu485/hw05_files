@@ -218,12 +218,12 @@ if __name__ == '__main__':
     ##Solution from Networkx
     BN.create_net();
     BN.findclosest();
-    path = BN.getSPNetworkx(15, 3)
-    BN.drawstreets();
-    BN.drawaddresses();
-    BN.drawroute(path,-97.8526, 30.2147, -97.6264, 30.4323)  #
-    pylab.show()
+#    path = BN.getSPNetworkx(15, 3)
+#    BN.drawstreets();
+#    BN.drawaddresses();
+#    BN.drawroute(path,-97.8526, 30.2147, -97.6264, 30.4323)  #
+#    pylab.show()
     ## Run Pyomo CAUTION:: This part will take significantly amount of time
-    # BN.create_frame();
-    # BN.getSPCplex();
-    # BN.drawpyomo(-97.8526, 30.2147, -97.6264, 30.4323)
+    BN.create_frame();
+    BN.getSPCplex();
+    BN.drawpyomo(-97.8526, 30.2147, -97.6264, 30.4323)
